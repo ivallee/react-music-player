@@ -21,14 +21,20 @@
   }
 
   class Container extends React.Component {
+   
+    constructor(props) {
+      super(props);
+      this.state = { isMusicPlaying: false };
+    }
+    
     render() {
       const addNumbers = (num1, num2) => {
         return num1 +num2;
       };
+      const status = this.state.isMusicPlaying ? 'Playing' : 'Not playing';
       return (
         <div>
-            <h1>The sum is: { addNumbers(1, 2) }</h1>
-            <OurFirstComponent />
+            <h1> {status } </h1>
             <PlayButton />
         </div>
       ); 
