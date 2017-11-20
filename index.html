@@ -11,33 +11,37 @@
 <script src="https://soulwire.github.io/sketch.js/js/sketch.min.js"></script>
 <script src="app.js"></script>
 <script type="text/babel">
-  const OurFirstComponent = () => {
-    return (
-      <h1>I am a child!</h1>
-    );
+  function PlayButton(props) {
+    const className = props.isMusicPlaying ? 'play active' : 'play';
+    return <a onClick={props.onClick} href="#" title="Play video" className={className} />;
   }
-  function PlayButton() {
-    return <a href="#" title= "Play Video" className="play" />
-  }
-
   class Container extends React.Component {
-   
     constructor(props) {
       super(props);
       this.state = { isMusicPlaying: false };
     }
-    
+    handleClick() {
+      if (this.state.isMusicPlaying) {
+        this.audio.pause();
+      } else {
+        this.audio.play();
+      }
+      this.setState(prevState => {
+        return { 
+          isMusicPlaying: !prevState.isMusicPlaying   
+        };
+      });
+    };
     render() {
-      const addNumbers = (num1, num2) => {
-        return num1 +num2;
-      };
-      const status = this.state.isMusicPlaying ? 'Playing' : 'Not playing';
       return (
         <div>
-            <h1> {status } </h1>
-            <PlayButton />
+          <PlayButton 
+            onClick={this.handleClick.bind(this)} 
+            isMusicPlaying={this.state.isMusicPlaying} 
+          />
+          <audio id="audio" ref={(audioTag) => { this.audio = audioTag}} />
         </div>
-      ); 
+      );
     }
   }
   const placeForComponent = document.getElementById('hook');
