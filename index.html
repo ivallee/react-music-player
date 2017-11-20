@@ -16,6 +16,9 @@
       <h1>I am a child!</h1>
     );
   }
+  function PlayButton() {
+    return <a href="#" title= "Play Video" className="play" />
+  }
 
   class Container extends React.Component {
     render() {
@@ -26,6 +29,7 @@
         <div>
             <h1>The sum is: { addNumbers(1, 2) }</h1>
             <OurFirstComponent />
+            <PlayButton />
         </div>
       ); 
     }
